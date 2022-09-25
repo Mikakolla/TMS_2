@@ -4,6 +4,7 @@ import entity.Car;
 import entity.CarService;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,11 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-
+@WebServlet(value="/car")
 public class CarServlet extends HttpServlet {
 
     public CarService carService = new CarService();
@@ -59,9 +59,9 @@ public class CarServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         writeCook(resp);
-        PrintWriter writer = resp.getWriter();
         carService.deleteCar(Integer.parseInt(req.getParameter("id")));
-        writer.println("car remove");
+        System.out.println("car remove");
+        resp.sendRedirect("/car/redirect");
     }
 
     private HttpServletResponse writeCook(HttpServletResponse resp) {
