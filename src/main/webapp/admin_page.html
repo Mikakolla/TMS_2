@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style/admin_page.css">
+</head>
+<body>
+<div class="div">
+    <h2>Добавление нового пользователя</h2>
+    <form method="post" action="/user/create_user">
+        <label for="login">Логин</label>
+        <input type="text" name="login" id="login" required>
+
+        <label for="password">Пароль</label>
+        <input type="password" name="password" id="password" required>
+
+        <label for="sex">Пол</label>
+        <div id="sex" class="radio">
+            <input type="radio" name="sex" id="man" value="man" required>
+            <span for="man">Man</span>
+            <input type="radio" name="sex" id="woman" value="woman">
+            <span for="woman">Woman</span>
+        </div>
+
+        <label for="description">Описание</label>
+        <input type="text" name="description" id="description" required>
+
+        <label for="role">Роль</label>
+        <div id="role" class="radio">
+            <input type="radio" name="role" id="user" value="user" required>
+            <span for="user">User</span>
+            <input type="radio" name="role" id="admin" value="admin">
+            <span for="admin">Admin</span>
+        </div>
+
+        <input type="submit">
+    </form>
+</div>
+
+</body>
+</html>

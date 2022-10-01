@@ -1,0 +1,38 @@
+body{
+    background-color: #efefef;
+    font-family: "Open Sans", sans-serif;
+}
+
+div{
+    width: 250px;
+    position: absolute;
+    top: 35%;
+    left: 45%;
+}
+
+h2{
+    text-align: center;
+}
+form{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    margin-bottom: 15px;
+}
+
+input[type=submit] {
+    background-color: #8192ff;
+    border-radius: 8px;
+    border-style: none;
+    color: #efefef;
+    height: 30px;
+}
+
+input{
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border-color: #cbcbcb;
+}

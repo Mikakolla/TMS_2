@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: #efefef;
+            font-family: "Open Sans", sans-serif;
+        }
+
+        body .div{
+            width: 250px;
+            position: absolute;
+            top: 25%;
+            left: 45%;
+        }
+
+        input[type=submit] {
+            background-color: #8192ff;
+            border-radius: 8px;
+            border-style: none;
+            color: #efefef;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="div">
+    <h3 style="text-align: center">Пользователь добавлен</h3>
+    <form method="post" action="/user/login" style="text-align: center">
+        <input type="submit" value="Перейти на страницу входа" />
+    </form>
+</div>
+</body>
+</html>
