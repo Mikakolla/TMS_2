@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="horse1" class="entity.Horse">
+        <constructor-arg name="name" value="Спирит"/>
+    </bean>
+    <bean name="rider1" class="entity.Rider">
+        <constructor-arg name="name" value="Саша"/>
+    </bean>
+    <bean name="pair1" class="entity.Pair">
+        <constructor-arg name="horse" ref="horse1"/>
+        <constructor-arg name="rider" ref="rider1"/>
+    </bean>
+
+    <bean name="horse2" class="entity.Horse">
+        <constructor-arg name="name" value="Пегас"/>
+    </bean>
+    <bean name="rider2" class="entity.Rider">
+        <constructor-arg name="name" value="Дима"/>
+    </bean>
+    <bean name="pair2" class="entity.Pair">
+        <constructor-arg name="horse" ref="horse2"/>
+        <constructor-arg name="rider" ref="rider2"/>
+    </bean>
+
+    <bean name="horse3" class="entity.Horse">
+        <constructor-arg name="name" value="Ветерок"/>
+    </bean>
+    <bean name="rider3" class="entity.Rider">
+        <constructor-arg name="name" value="Алина"/>
+    </bean>
+    <bean name="pair3" class="entity.Pair">
+        <constructor-arg name="horse" ref="horse3"/>
+        <constructor-arg name="rider" ref="rider3"/>
+    </bean>
+
+    <bean name="pairsList"
+          class="entity.ListPairs">
+        <property name="pairs">
+            <list value-type="entity.Pair">
+                <ref bean="pair1"/>
+                <ref bean="pair2"/>
+                <ref bean="pair3"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean name="choicePair" class="service.UserService">
+        <constructor-arg name="listPairs" ref="pairsList"/>
+    </bean>
+
+    <bean name="eventService" class="service.EventService"/>
+
+    <bean name="raceService" class="service.RaceService">
+        <constructor-arg name="listPairs" ref="pairsList"/>
+        <constructor-arg name="userService" ref="choicePair"/>
+        <constructor-arg name="eventService" ref="eventService"/>
+    </bean>
+
+</beans>
