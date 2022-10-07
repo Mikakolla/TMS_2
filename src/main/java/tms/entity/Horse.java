@@ -1,4 +1,4 @@
-package entity;
+package tms.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

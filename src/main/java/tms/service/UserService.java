@@ -1,22 +1,23 @@
-package service;
+package tms.service;
 
-import entity.ListPairs;
-import entity.Pair;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import tms.entity.Pair;
 
 import java.util.List;
 import java.util.Scanner;
 
 @Data
-@NoArgsConstructor
+@Service
 public class UserService {
 
-    private Pair choicePair;
-    private ListPairs listPairs;
+    private Pair pair;
+    @Autowired
+    private List<Pair> pairs;
 
-    public UserService(ListPairs listPairs) {
-        this.listPairs = listPairs;
+
+    public UserService() {
     }
 
     public void doChoicePair() {
@@ -27,8 +28,7 @@ public class UserService {
             System.out.println("Всего существует 3 пары ");
             doChoicePair();
         }
-        List<Pair> pairs = listPairs.getPairs();
 
-        choicePair = pairs.get(choiceNumber-1);
+        pair = pairs.get(choiceNumber-1);
     }
 }
