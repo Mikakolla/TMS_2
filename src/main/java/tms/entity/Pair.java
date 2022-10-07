@@ -1,4 +1,4 @@
-package entity;
+package tms.entity;
 
 import lombok.Data;
 

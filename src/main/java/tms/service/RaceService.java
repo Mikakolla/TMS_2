@@ -1,28 +1,37 @@
-package service;
+package tms.service;
 
-import entity.ListPairs;
-import entity.Pair;
-import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import tms.entity.Pair;
+import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.util.Map.Entry.comparingByValue;
 import static java.util.stream.Collectors.toMap;
 
-@Data
+@Component
 public class RaceService {
 
     private double circleDistance = 1000.0;
-    private Map<Pair, Double> resultCircle = new HashMap<>();
-    private ListPairs listPairs;
+    private HashMap<Pair, Double> resultCircle = new HashMap<>();
+
+    @Autowired
+    private List<Pair> pairs;
+
+    @Autowired
     private UserService userService;
+
+    @Autowired
     private EventService eventService;
 
-    public RaceService(ListPairs listPairs, UserService userService, EventService eventService) {
-        this.listPairs = listPairs;
-        this.userService = userService;
-        this.eventService = eventService;
+    public RaceService() {
     }
+
+
+
 
     public void startRace() throws InterruptedException {
 
@@ -43,8 +52,6 @@ public class RaceService {
     }
 
     public void startNewCircle() {
-
-        List<Pair> pairs = listPairs.getPairs();
 
         for (Pair pair : pairs) {
             Double timeCircle = circleDistance/pair.getTotalAmount();
@@ -74,7 +81,7 @@ public class RaceService {
 
         Pair winnerPair = resultCircle.entrySet().iterator().next().getKey();
 
-        if (winnerPair == userService.getChoicePair()) {
+        if (winnerPair == userService.getPair()) {
             System.out.println("Поздравляем, вы выйграли!");
         } else {
             System.out.println("К сожалению, вы проиграли :с");
@@ -82,7 +89,6 @@ public class RaceService {
     }
 
     public void printAllPair() {
-        List<Pair> pairs = listPairs.getPairs();
 
         int number = 1;
 

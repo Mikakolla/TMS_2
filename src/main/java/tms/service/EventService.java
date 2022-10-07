@@ -1,7 +1,9 @@
-package service;
+package tms.service;
 
-import entity.Pair;
+import org.springframework.stereotype.Service;
+import tms.entity.Pair;
 
+@Service
 public class EventService {
 
     public Double catRan (Pair pair) {
