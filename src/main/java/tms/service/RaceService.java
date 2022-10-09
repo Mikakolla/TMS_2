@@ -1,6 +1,7 @@
 package tms.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import tms.aop.Loggable;
 import tms.entity.Pair;
 import org.springframework.stereotype.Component;
 
@@ -30,9 +31,7 @@ public class RaceService {
     public RaceService() {
     }
 
-
-
-
+    @Loggable
     public void startRace() throws InterruptedException {
 
         printAllPair();
