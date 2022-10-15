@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Поиск</title>
@@ -9,23 +10,26 @@
     <c:out>${result}</c:out>
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-search-tab" data-bs-toggle="tab" data-bs-target="#nav-search" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Поиск</button>
-            <button class="nav-link" id="nav-add-book-tab" data-bs-toggle="tab" data-bs-target="#nav-add-book" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Добавление книги</button>
+            <button class="nav-link" id="nav-search-tab" data-bs-toggle="tab" data-bs-target="#nav-search" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Поиск</button>
+            <button class="nav-link active" id="nav-add-book-tab" data-bs-toggle="tab" data-bs-target="#nav-add-book" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Добавление книги</button>
         </div>
     </nav>
     <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
+        <div class="tab-pane fade" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
             <form class="form-control d-flex flex-column" style="width: 250px" action="/book/book/search">
-                <input style="margin-bottom: 5px;" type="text" name="str" required>
+                <input class="form-control" style="margin-bottom: 5px;" type="text" name="str" required>
                 <input class="btn btn-primary" type="submit" value="Поиск">
             </form>
         </div>
-        <div class="tab-pane fade" id="nav-add-book" role="tabpanel" aria-labelledby="nav-add-book-tab">
-            <form class="form-control d-flex flex-column" style="width: 250px" method="post" action="/book/book/add">
-                <input style="margin-bottom: 5px;" type="text" name="name" placeholder="Наименование книги">
-                <input style="margin-bottom: 5px;" type="text" name="author" placeholder="Автор">
+        <div class="tab-pane fade show active" id="nav-add-book" role="tabpanel" aria-labelledby="nav-add-book-tab">
+            <sf:form modelAttribute="book" class="form-control d-flex flex-column" style="width: 250px" method="post" action="/book/book/add">
+                <sf:input path="name" class="form-control" style="margin-bottom: 5px;" type="text" placeholder="Наименование книги"/>
+                <sf:errors path="name"></sf:errors>
+                <sf:input path="author" class="form-control" style="margin-bottom: 5px;" placeholder="Автор"/>
+                <sf:errors path="author"></sf:errors>
+                ${error}
                 <input class="btn btn-primary" type="submit" value="Добавить книгу">
-            </form>
+            </sf:form>
         </div>
     </div>
 </div>

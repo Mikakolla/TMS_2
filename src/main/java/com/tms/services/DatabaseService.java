@@ -1,6 +1,7 @@
 package com.tms.services;
 
 import com.tms.entity.Book;
+import com.tms.exceptions.BookSaveException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,19 +32,41 @@ public class DatabaseService {
         return books;
     }
 
-    public int setBook(String name, String author) throws SQLException {
+    public int setBook(Book book) throws SQLException {
 
-        System.out.println("add databaseService");
+        int result;
 
-        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO books VALUES (?, ?, ?)");
+        List<Book> bookByNameAndAuthor = getBookByNameAndAuthor(book);
 
-        preparedStatement.setInt(1, getNextId());
-        preparedStatement.setString(2, name);
-        preparedStatement.setString(3, author);
+        if (bookByNameAndAuthor.size() > 0) {
+            throw new BookSaveException("Данная книга уже добавлена");
+        } else {
 
-        int result = preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO books VALUES (?, ?, ?)");
+
+            preparedStatement.setInt(1, getNextId());
+            preparedStatement.setString(2, book.getName());
+            preparedStatement.setString(3, book.getAuthor());
+
+            result = preparedStatement.executeUpdate();
+        }
 
         return result;
+
+    }
+
+    private List<Book> getBookByNameAndAuthor (Book book) throws SQLException {
+
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM books where lower(name) like lower(?) or lower(author) like lower(?)");
+
+        preparedStatement.setString(1, book.getName());
+        preparedStatement.setString(2, book.getAuthor());
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        List<Book> books = getBookFromResult(resultSet);
+
+        return books;
 
     }
 
