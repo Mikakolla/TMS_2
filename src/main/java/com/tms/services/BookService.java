@@ -19,9 +19,9 @@ public class BookService {
 
     }
 
-    public int setBook(String name, String author) throws SQLException {
+    public int setBook(Book book) throws SQLException {
 
-        return databaseService.setBook(name, author);
+        return databaseService.setBook(book);
 
     }
 }
