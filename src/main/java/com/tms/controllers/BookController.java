@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.sql.SQLException;
 import java.util.List;
 
 @Controller
@@ -28,7 +27,7 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    public String searchBook(@RequestParam(value = "str") String strForSearch, Model model) throws SQLException {
+    public String searchBook(@RequestParam(value = "str") String strForSearch, Model model) {
 
         List<Book> bookByNameOrAuthor = bookService.getBookByNameOrAuthor(strForSearch);
 
@@ -39,16 +38,9 @@ public class BookController {
 
     @PostMapping("/add")
     public String addBook(@Valid Book book,
-                          BindingResult bindingResultName,
-                          Model model) throws SQLException {
+                          BindingResult bindingResultName) {
 
-        int result = bookService.setBook(book);
-
-        String addBook = "Книга добавлена";
-
-        if (result == 1) {
-            model.addAttribute("result", addBook);
-        }
+        bookService.setBook(book);
 
         return "/book_search";
     }
