@@ -20,5 +20,4 @@ public class Book {
 
     @NotBlank
     private String author;
-
 }

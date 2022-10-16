@@ -4,7 +4,6 @@ import com.tms.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -13,15 +12,15 @@ public class BookService {
     @Autowired
     private DatabaseService databaseService;
 
-    public List<Book> getBookByNameOrAuthor(String strForSearch) throws SQLException {
+    public List<Book> getBookByNameOrAuthor(String strForSearch) {
 
         return databaseService.getBookByNameOrAuthor(strForSearch);
 
     }
 
-    public int setBook(Book book) throws SQLException {
+    public void setBook(Book book) {
 
-        return databaseService.setBook(book);
+        databaseService.setBook(book);
 
     }
 }
