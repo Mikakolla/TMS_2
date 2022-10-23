@@ -1,6 +1,8 @@
 package com.example.hibernate.config;
 
 import com.example.hibernate.entity.Car;
+import com.example.hibernate.entity.Person;
+import com.example.hibernate.entity.Region;
 import lombok.AllArgsConstructor;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -36,6 +38,8 @@ public class DatabaseConfig {
         configuration.setProperty("hibernate.dialect", dialect);
         configuration.setProperty("hibernate.hbm2ddl.auto", "create");
         configuration.addAnnotatedClass(Car.class);
+        configuration.addAnnotatedClass(Region.class);
+        configuration.addAnnotatedClass(Person.class);
         return configuration;
     }
 

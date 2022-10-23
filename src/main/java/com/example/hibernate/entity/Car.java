@@ -1,7 +1,8 @@
 package com.example.hibernate.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -10,7 +11,8 @@ import java.util.Date;
 
 @Entity
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Car {
 
     @Id
@@ -37,6 +39,14 @@ public class Car {
 
     @Version
     private int version;
+
+    @ManyToOne
+    @JoinColumn(name="regionId")
+    private Region region;
+
+    @ManyToOne
+    @JoinColumn(name = "personId")
+    private Person person;
 
     public Car(String number, Brand brand, Date dateCreateCar, boolean stockAvailability) {
         this.number = number;
